@@ -1,17 +1,16 @@
-# app.py
-from flask import Flask,render_template
+from flask import Flask
+from flask_restful import Resource,Api,abort,reqparse
+
+
+
 
 app = Flask(__name__)
+api = Api(app)
 
-@app.route('/')
-def hello():
-    return render_template('index.html')
-    # return "Hello, World!"
 
-@app.route('/products')
-def products():
-    return 'this is porduct page'
 
-if __name__ == '__main__':
+
+
+
+if __name__ =='__main__':
     app.run(debug=True)
-
