@@ -79,7 +79,7 @@ class TodoList(Resource):
     @marshal_with(resourse_fields)
     def put(self,todos_id):
         task=USER.query.filter_by(id = todos_id).first()
-        args=task_put_args.add_argument()
+        args=task_put_args.parse_args()
         if not task:
             abort(404,'task not found ')
         if args['task']:
