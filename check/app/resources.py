@@ -1,5 +1,6 @@
 from flask_restful import Resource, reqparse, abort, fields, marshal_with
-from app import db
+from .models import User
+from . import db
 
 task_post_args = reqparse.RequestParser()
 task_post_args.add_argument('task', type=str, required=True, help="task is required")
@@ -14,7 +15,7 @@ resource_fields = {
     'task': fields.String,
     'summary': fields.String
 }
-from models import User
+
 class Todos(Resource):
     @marshal_with(resource_fields)
     def get(self):
@@ -23,7 +24,7 @@ class Todos(Resource):
 
 class TodoList(Resource):
     @marshal_with(resource_fields)
-    def get(self, todo_id):
+    def get(self,todo_id):
         task = User.query.filter_by(id=todo_id).first()
         if not task:
             abort(404, message="Task not found, please check")
